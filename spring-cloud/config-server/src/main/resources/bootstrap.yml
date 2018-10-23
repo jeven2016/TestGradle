@@ -1,0 +1,15 @@
+server:
+  port: 9040
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: http://10.113.49.205:5800/z.j.wang/TestGradle.git  # it should be ended with '.git'
+          username: z.j.wang
+          password: 11111111
+          search-paths:
+             - '/spring-cloud/config-files/'
+             - '/spring-cloud/config-files/*'

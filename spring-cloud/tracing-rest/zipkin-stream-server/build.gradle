@@ -1,0 +1,21 @@
+apply plugin: 'org.springframework.boot'
+
+dependencyManagement {
+  imports {
+    mavenBom libs.'spring-cloud-dependencies'
+  }
+}
+
+dependencies {
+
+//    compile libs.'spring-boot-starter-actuator'
+  compile('org.springframework.cloud:spring-cloud-sleuth-zipkin-stream')
+  compile('org.springframework.cloud:spring-cloud-starter-sleuth')
+  runtime('io.zipkin.java:zipkin-autoconfigure-ui')
+
+  //libs for spring cloud stream kafka
+  compile libs.avro
+  compile libs.'spring-cloud-starter-stream-kafka'
+
+
+}

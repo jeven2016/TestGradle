@@ -1,0 +1,7 @@
+version: '2'
+services:
+  web:
+    image: 'sonarqube'
+    ports:
+      - '5802:9000'
+      - '5803:9090'

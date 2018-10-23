@@ -1,0 +1,13 @@
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+  compile libs.'lombok'
+  compile libs.'spring-boot-starter-data-redis'
+
+  //libs for spring test
+  testCompile libs.'spring-security-test'
+  testCompile libs.'spring-boot-starter-test'
+  testCompile libs.'powermock-module-junit4'
+  testCompile libs.'powermock-api-mockito2'
+  testCompile libs.'powermock-module-junit4-rule-agent'
+}

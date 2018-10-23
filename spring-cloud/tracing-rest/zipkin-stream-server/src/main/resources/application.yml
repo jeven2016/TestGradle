@@ -1,0 +1,31 @@
+server:
+  port: 9411
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        input:   # input channel name
+          destination: tracing.input    # Kafka topic
+          #content-type: application/*+avro
+          group: slc
+          consumer:
+            autoCommitOffset: yes
+            #headerMode: raw
+        output: # output channel name
+          destination: tracing.output   # Kafka topic
+          #content-type: application/*+avro
+      kafka:
+        binder:
+          autoCreateTopics: true
+          requiredAcks: 1
+          brokers: ${slc.kafka.host}:${slc.kafka.port}
+          zkNodes: ${slc.zookeeper.host}:${slc.zookeeper.port}
+
+slc:
+  kafka:
+    host: localhost
+    port: 9093
+  zookeeper:
+    host: localhost
+    port: 2181

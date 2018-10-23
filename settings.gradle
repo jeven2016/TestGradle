@@ -1,0 +1,26 @@
+rootProject.name = 'TestGradle'
+
+include 'spring-cloud'
+include 'spring-cloud:feign-client'
+include 'spring-cloud:registry-service'
+include 'spring-cloud:rest-service-demo'
+include 'spring-cloud:config-server'
+findProject(':spring-cloud:config-server')?.name = 'config-server'
+include 'spring-data-jpa-elasticsearch'
+include 'spring-cloud:tracing-rest'
+include 'spring-cloud:tracing-rest:sleuth-service'
+include 'spring-cloud:tracing-rest:service-A'
+include 'spring-cloud:tracing-rest:service-B'
+include 'spring-cloud:tracing-rest:zipkin-server'
+include 'spring-cloud:tracing-rest:zipkin-stream-server'
+
+include 'spring-cloud:contract-test'
+include 'spring-cloud:contract-test:rest-server'
+
+include 'spring-data-redis'
+include 'spring-cloud:contract-test:rest-client'
+include 'spring-cloud:contract-test:rest-client-stubs-dep'
+include 'spring-cloud:contract-test:rest-server-dsl-dir'
+include 'spring-profile-test'
+include 'jdk_test'
+

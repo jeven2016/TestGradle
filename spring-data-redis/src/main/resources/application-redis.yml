@@ -1,0 +1,13 @@
+spring:
+  cache:
+    type: redis
+  redis:
+    database: 0
+    host: 10.113.49.247
+    port: 5806
+    password:
+    ssl: false
+    timeout: 0
+    pool:
+      max-active: 8
+      max-idle: 8

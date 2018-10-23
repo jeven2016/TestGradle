@@ -1,0 +1,15 @@
+1. kafka cluster
+    zookeeper: 5804
+    kafka:     5805
+    kafka-mgr: 5807
+
+2. redis
+    redis:     5806
+
+3. gitlab
+    gitlab:    5800
+
+4. sonarqube
+   9000        5802
+   9092        5803
+

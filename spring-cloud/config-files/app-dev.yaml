@@ -1,0 +1,7 @@
+
+# access this configuration via http://config-server:9040/app/dev
+server:
+  port: 9040
+spring:
+  application:
+    name: config-server

@@ -1,0 +1,17 @@
+
+# currently disable ribbon
+ribbon:
+  eureka:
+   enabled: false
+
+# a service won't register on eureka server
+# Use Ribbon Without Eureka
+rest-service-1:
+  ribbon:
+    listOfServers: localhost:9010, localhost:9020
+
+
+# this configuration will be retrieved from config server
+config:
+  param:
+    appName: feign-client

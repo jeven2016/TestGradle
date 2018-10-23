@@ -1,0 +1,4 @@
+stubrunner:
+  idsToServiceIds:
+    # remove::start[]
+    remote-service: rest-server

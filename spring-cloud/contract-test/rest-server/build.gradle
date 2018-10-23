@@ -1,0 +1,67 @@
+apply plugin: 'org.springframework.boot'
+apply plugin: 'spring-cloud-contract'
+apply plugin: "io.spring.dependency-management"
+apply plugin: 'maven-publish'
+
+dependencyManagement {
+  imports {
+    mavenBom libs.'spring-cloud-dependencies'
+    mavenBom 'org.springframework.cloud:spring-cloud-contract-dependencies:1.1.1.RELEASE'
+    //todo need to verify
+  }
+}
+
+dependencies {
+  compile libs.'spring-boot-starter-web'
+  compile libs.'lombok'
+
+  //libs for spring test
+  testCompile libs.'spring-boot-starter-test'
+  testCompile libs.'powermock-module-junit4'
+  testCompile libs.'powermock-api-mockito2'
+  testCompile libs.'powermock-module-junit4-rule-agent'
+  testCompile libs.'spring-cloud-stream-test-support'
+  testCompile libs.'spring-cloud-starter-contract-verifier'
+}
+
+publish {
+  dependsOn assemble
+}
+
+publishing {
+  publications {
+    maven(MavenPublication) {
+      //only publish javadoc and spring boot executable jars to nexus
+      artifact javadocJar
+      artifact jar
+    }
+
+    //for publish contract test relate stubs jar
+    stubs(MavenPublication) {
+      artifactId "${project.name}-contract"
+      artifact verifierStubsJar
+    }
+  }
+  repositories {
+    maven {
+      credentials {
+        username = nexusUsername
+        password = nexusPassword
+      }
+
+      url nexusUrl
+    }
+  }
+}
+
+/**
+ * for spring contract test
+ */
+contracts {
+  // if you have a contract under (for example)
+  // src/test/resources/contract/foo/bar/baz/ and set the value of the packageWithBaseClasses
+  // property to com.example.base, then Spring Cloud Contract Verifier assumes that there is
+  // a BarBazBase class under the com.example.base package.
+  packageWithBaseClasses = "zjtech.cts.base"
+}
+

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+  <appender class="ch.qos.logback.core.rolling.RollingFileAppender" name="FILE">
+    <file>/var/log/web.log
+    </file> <!--this file should be modified together with logback-spring.xml -->
+    <append>true</append>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>/var/log/web-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+      <maxFileSize>20MB</maxFileSize>
+      <maxHistory>20</maxHistory>
+      <!--<totalSizeCap>5GB</totalSizeCap>-->
+    </rollingPolicy>
+    <encoder>
+      <pattern>%date %-5level [%thread] %logger{36} [%file:%line] %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender class="ch.qos.logback.core.ConsoleAppender" name="STDOUT">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <pattern>%date %-5level [%thread] %logger{36} [%file:%line] %msg%n</pattern>
+    </layout>
+  </appender>
+
+  <appender class="ch.qos.logback.core.rolling.RollingFileAppender" name="tracing_file">
+    <file>/var/log/sleuth_tracing.log</file>
+    <append>true</append>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>/var/log/sleuth_tracing-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+      <maxFileSize>20MB</maxFileSize>
+      <maxHistory>20</maxHistory>
+      <!--<totalSizeCap>5GB</totalSizeCap>-->
+    </rollingPolicy>
+    <encoder>
+      <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+    </encoder>
+  </appender>
+
+  <appender class="ch.qos.logback.core.ConsoleAppender" name="sleuth_console">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+    </layout>
+  </appender>
+
+  <!-- special configuration for sleuth tracing log -->
+  <logger additivity="false" level="INFO" name="org.springframework.cloud.sleuth">
+    <appender-ref ref="sleuth_console"/>
+    <!--<appender-ref ref="tracing_file"/>-->
+  </logger>
+
+  <!-- Note: please change the log level in applications.properties file -->
+  <root level="INFO">
+    <appender-ref ref="FILE"/>
+    <appender-ref ref="STDOUT"/>
+  </root>
+
+  <!--
+    <springProfile name="dev">
+      <root level="info">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="SAVE-TO-FILE"/>
+      </root>
+      <logger name="com.lankydan.service.MyServiceImpl" additivity="false" level="debug">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="SAVE-TO-FILE"/>
+      </logger>
+    </springProfile>-->
+
+</configuration>
