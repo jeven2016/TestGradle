@@ -1,5 +1,40 @@
 version: '2'
 services:
+
+  master:
+    image: 'redis:latest'
+    ports:
+      - '5801:6379'
+      - '5807:26379'
+    container_name: master
+    command: redis-server my-sentinel.conf --sentinel
+
+
+  slave1:
+    image: 'redis:latest'
+    ports:
+      - '5802:6379'
+      - '5808:26379'
+    command: >
+      sh -c "redis-server --slaveof master 6379 &&
+             redis-server my-sentinel.conf --sentinel"
+    depends_on:
+      - master
+    container_name: slave1
+
+
+  slave2:
+    image: 'redis:latest'
+    ports:
+      - '5803:6379'
+      - '5809:26379'
+    command: >
+      sh -c "redis-server --slaveof master 6379 &&
+             redis-server my-sentinel.conf --sentinel"
+    depends_on:
+      - master
+    container_name: slave2
+
   redis:
     image: 'redis:latest'
     restart: always
