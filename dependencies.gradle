@@ -1,6 +1,6 @@
 //Global project information
 ext.projectInfo = [
-    'group'              : 'oracle.communications.mdcc.slc',
+    'group'              : 'zjtech',
     'version'            : '0.1',
     'sourceCompatibility': '1.8',
     'targetCompatibility': '1.8'
