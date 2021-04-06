@@ -1,14 +1,14 @@
 package others;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
+import java.util.Base64.Decoder;
+import java.util.Base64.Encoder;
 import javax.crypto.KeyGenerator;
 import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class SecurityUti {
 
@@ -30,32 +30,22 @@ public class SecurityUti {
 
   /**
    * BASE64解密
-   *
-   * @param key
-   * @return
-   * @throws Exception
    */
   public static byte[] decryptBASE64(String key) throws Exception {
-    return (new BASE64Decoder()).decodeBuffer(key);
+    Decoder decoder = Base64.getDecoder();
+    return decoder.decode(key);
   }
 
   /**
    * BASE64加密
-   *
-   * @param key
-   * @return
-   * @throws Exception
    */
   public static String encryptBASE64(byte[] key) throws Exception {
-    return (new BASE64Encoder()).encodeBuffer(key);
+    Encoder encoder = Base64.getEncoder();
+    return encoder.encodeToString(key);
   }
 
   /**
    * MD5加密
-   *
-   * @param data
-   * @return
-   * @throws Exception
    */
   public static byte[] encryptMD5(byte[] data) {
 
@@ -73,10 +63,6 @@ public class SecurityUti {
 
   /**
    * SHA加密
-   *
-   * @param data
-   * @return
-   * @throws Exception
    */
   public static byte[] encryptSHA(byte[] data) throws Exception {
 
@@ -89,9 +75,6 @@ public class SecurityUti {
 
   /**
    * 初始化HMAC密钥
-   *
-   * @return
-   * @throws Exception
    */
   public static String initMacKey() throws Exception {
     KeyGenerator keyGenerator = KeyGenerator.getInstance(KEY_MAC);
@@ -102,11 +85,6 @@ public class SecurityUti {
 
   /**
    * HMAC加密
-   *
-   * @param data
-   * @param key
-   * @return
-   * @throws Exception
    */
   public static byte[] encryptHMAC(byte[] data, String key) throws Exception {
 

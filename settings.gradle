@@ -14,8 +14,8 @@ include 'spring-cloud:tracing-rest:service-B'
 include 'spring-cloud:tracing-rest:zipkin-server'
 include 'spring-cloud:tracing-rest:zipkin-stream-server'
 
-include 'spring-cloud:contract-test'
-include 'spring-cloud:contract-test:rest-server'
+//include 'spring-cloud:contract-test'
+//include 'spring-cloud:contract-test:rest-server'
 
 include 'spring-data-redis'
 include 'spring-cloud:contract-test:rest-client'

@@ -1,5 +1,5 @@
 apply plugin: 'org.springframework.boot'
-apply plugin: 'spring-cloud-contract'
+//apply plugin: 'spring-cloud-contract'
 apply plugin: "io.spring.dependency-management"
 apply plugin: 'maven-publish'
 
@@ -45,13 +45,13 @@ publishing {
 /**
  * for spring contract test
  */
-contracts {
-  // if you have a contract under (for example)
-  // src/test/resources/contract/foo/bar/baz/ and set the value of the packageWithBaseClasses
-  // property to com.example.base, then Spring Cloud Contract Verifier assumes that there is
-  // a BarBazBase class under the com.example.base package.
-  packageWithBaseClasses = "zjtech.cts.base"
-
-  contractsDslDir = project(":").file("contracts")
-}
+//contracts {
+//  // if you have a contract under (for example)
+//  // src/test/resources/contract/foo/bar/baz/ and set the value of the packageWithBaseClasses
+//  // property to com.example.base, then Spring Cloud Contract Verifier assumes that there is
+//  // a BarBazBase class under the com.example.base package.
+//  packageWithBaseClasses = "zjtech.cts.base"
+//
+//  contractsDslDir = project(":").file("contracts")
+//}
 
